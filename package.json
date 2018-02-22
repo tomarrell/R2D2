@@ -4,15 +4,15 @@
   "description": "HOC for dispatching an action automatically on component render",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx eslint . && echo \"Error: no test specified\" && exit 1"
   },
   "author": "Tom Arrell <me@tomarrell.com> (https://github.com/tomarrell)",
   "license": "MIT",
   "dependencies": {
-    "eslint": "^4.18.1",
     "react": "^16.2.0"
   },
   "devDependencies": {
+    "eslint": "^4.18.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
