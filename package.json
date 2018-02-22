@@ -1,0 +1,11 @@
+{
+  "name": "R2HOC",
+  "version": "0.1.0",
+  "description": "HOC for dispatching an action automatically on component render",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tom Arrell <me@tomarrell.com> (https://github.com/tomarrell)",
+  "license": "MIT"
+}
