@@ -13,35 +13,41 @@ export default function (WrappedComponent) {
 
     componentDidMount() {
       const {
-        selector,
-        validateState,
-      } = this.props;
-      const { store } = this.context;
+        context: { store },
+        checkState,
+        props: { action },
+      } = this;
 
       console.log(store);
-      const selectedState = selector(store.getState());
 
-      if (validateState(selectedState)) {
-        this.setState({
-          valid: true,
-        });
+      if (checkState()) {
+        this.setState({ valid: true });
       }
 
+      store.dispatch(action);
       this.setState({ valid: false });
     }
 
     checkState = () => {
-      const { store } = this.context;
-      const { selector, validateState } = this.props;
+      const {
+        context: { store },
+        props: {
+          selector,
+          validateState,
+        },
+      } = this;
 
       return validateState(selector(store.getState()));
     }
 
     render() {
-      const { valid } = this.state;
-      const { altComponent: Alt, ...passThroughProps } = this.props;
-
-      console.log(this.props);
+      const {
+        state: { valid },
+        props: {
+          altComponent: Alt,
+          ...passThroughProps
+        },
+      } = this;
 
       if (valid) {
         return (
