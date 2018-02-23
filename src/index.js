@@ -8,51 +8,80 @@ export default function (WrappedComponent) {
 
       this.state = {
         valid: false,
+        data: null,
       };
     }
 
     componentDidMount() {
-      const {
-        context: { store },
-        checkState,
-        props: { action },
-      } = this;
+      const { store } = this.context;
+      const { action } = this.props;
 
-      console.log(store);
-
-      if (checkState()) {
-        this.setState({ valid: true });
-      }
-
+      this.validateStore();
+      this.updateSubscription();
       store.dispatch(action);
-      this.setState({ valid: false });
     }
 
-    checkState = () => {
-      const {
-        context: { store },
-        props: {
-          selector,
-          validateState,
-        },
-      } = this;
+    componentDidUpdate(prevProps) {
+      const { selector: newSelector } = this.props;
 
-      return validateState(selector(store.getState()));
+      if (newSelector !== prevProps.selector) {
+        if (this.validateStore()) {
+          this.handleStoreChange();
+          return;
+        }
+
+        this.updateSubscription();
+      }
+    }
+
+    componentWillUnmount() {
+      if (this._subscription) {
+        this._subscription();
+      }
+    }
+
+    getSelectedState = () => {
+      const { store } = this.context;
+      const { selector } = this.props;
+
+      return selector(store.getState());
+    }
+
+    handleStoreChange = () => {
+      this.setState({
+        data: this.getSelectedState(),
+      });
+    }
+
+    updateSubscription = () => {
+      const { store } = this.context;
+
+      this._subscription = store.subscribe(this.handleStoreChange);
+    }
+
+    validateStore = () => {
+      const { validateStore } = this.props;
+
+      const isStoreValid = validateStore(this.getSelectedState());
+
+      this.setState({
+        valid: isStoreValid,
+      });
+
+      return isStoreValid;
     }
 
     render() {
-      const {
-        state: { valid },
-        props: {
-          altComponent: Alt,
-          ...passThroughProps
-        },
-      } = this;
+      const { valid, data } = this.state;
+      const { altComponent: Alt, ...passThroughProps } = this.props;
 
-      if (valid) {
+      console.log(data);
+
+      if (!Alt || valid) {
         return (
           <WrappedComponent
             {...passThroughProps}
+            data={data}
           />
         );
       }
@@ -73,12 +102,15 @@ export default function (WrappedComponent) {
       payload: PropTypes.object,
     }).isRequired,
 
-    validateState: PropTypes.func,
-    altComponent: PropTypes.node,
+    validateStore: PropTypes.func,
+    altComponent: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.func,
+    ]),
   };
 
   R2HOC.defaultProps = {
-    validateState: state => !!state,
+    validateStore: state => !!state,
     altComponent: null,
   };
 
