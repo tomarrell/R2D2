@@ -2,30 +2,42 @@
   "name": "R2D2",
   "version": "0.1.0",
   "description": "HOC for dispatching an action automatically on component render",
-  "main": "src/index.js",
+  "main": "lib/r2d2.js",
+  "module": "es/r2d2.js",
   "scripts": {
-    "test": "npx eslint . && echo \"Error: no test specified\" && exit 1"
+    "test": "npx eslint . && echo \"Error: no test specified\" && exit 1",
+    "build:commonjs": "rollup -c -f cjs -o lib/r2d2.js",
+    "build:es": "rollup -c -f es -o es/r2d2.js",
+    "build:umd": "rollup -c -f umd -n r2d2 -o dist/r2d2.js",
+    "build": "npm run build:commonjs && npm run build:es && npm run build:umd"
   },
   "author": "Tom Arrell <me@tomarrell.com> (https://github.com/tomarrell)",
   "license": "MIT",
   "dependencies": {
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
     "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-redux": "^5.0.7",
-    "redux": "^3.7.2"
+    "react": "^16.2.0"
   },
+  "files": [
+    "dist",
+    "lib",
+    "src",
+    "es"
+  ],
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
     "eslint": "^4.18.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-class-property": "^1.1.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0"
+    "eslint-plugin-react": "^7.7.0",
+    "rollup": "^0.56.3",
+    "rollup-plugin-babel": "^3.0.3"
   }
 }
