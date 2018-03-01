@@ -8,6 +8,8 @@
       }
     ]
   ],
+  "plugins": ["transform-class-properties", "transform-object-rest-spread"],
+
   "env": {
     "test": {
       "presets": [
@@ -16,6 +18,5 @@
       ],
       "plugins": ["transform-class-properties", "transform-object-rest-spread"]
     },
-  },
-  "plugins": ["transform-class-properties", "transform-object-rest-spread"]
+  }
 }
