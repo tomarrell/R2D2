@@ -5,7 +5,7 @@
   "main": "lib/r2d2.js",
   "module": "es/r2d2.js",
   "scripts": {
-    "test": "npx eslint . && echo \"Error: no test specified\" && exit 1",
+    "test": "eslint ./src && BABEL_ENV=test mocha --compilers js:babel-core/register",
     "build:commonjs": "rollup -c -f cjs -o lib/r2d2.js",
     "build:es": "rollup -c -f es -o es/r2d2.js",
     "build:umd": "rollup -c -f umd -n r2d2 -o dist/r2d2.js",
@@ -37,6 +37,7 @@
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
+    "mocha": "^5.0.1",
     "rollup": "^0.56.3",
     "rollup-plugin-babel": "^3.0.3"
   }
