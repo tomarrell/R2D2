@@ -11,5 +11,6 @@ module.exports = {
     'react/no-did-mount-set-state': 'off',
     'no-underscore-dangle': 'off',
     'react/no-did-update-set-state': 'off', // https://github.com/facebook/react/pull/12028
+    'no-unused-expressions': 'off',
   },
 };
