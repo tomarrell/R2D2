@@ -1,6 +1,6 @@
 {
   "name": "react-r2d2",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "HOC for dispatching an action automatically on component render",
   "repository": "https://github.com/tomarrell/R2D2",
   "main": "lib/r2d2.js",
