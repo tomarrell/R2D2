@@ -27,6 +27,19 @@ npm run test
 
 The test suit is written using Mocha for execution and Chai for expect-style assertions. It also utilizes Enzyme for DOM and React component manipulation.
 
+## API
+Calling the HOC with passing in your component as the argument, you will be returned a new component which will accept the following props.
+
+### Required props
+- **selector**, *function*: This is the Redux selector method to select the portion of store you would like to validate.
+
+- **action**, *{ type: String, payload: Any }*: The Redux action you would like to dispatch to fetch the data to populate the selected portion of the store.
+
+### Optional props
+- **validateStore**, *function*: this is an optional function that will determine the validity of the selected portion of store to fulfill the wrapped components requirements. This will default to a simple `selectedState => !!selectedState` boolean check.
+
+- **altComponent**, *node*: this optional node will be shown while the validity of the selected state is false. This could be a React component, or a simple text node. This is ideal for placing a loading component while the data is being fetched.
+
 ## Usage
 An example of this HOC in the wild.
 
