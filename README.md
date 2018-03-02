@@ -34,5 +34,11 @@ An example of this HOC in the wild.
 // Example
 ```
 
+## Contributing 
+Feel free to open a PR contributing a feature addition, bugfix or even adding improving documentation. PR's are always welcome! :)
+
+## Issues
+As this project is still in Alpha, there is a very significant chance of bugs popping up. If you do run into something of the sort, please feel free to open an issue and it will be looked into ASAP.
+
 ## License
 MIT
