@@ -1,5 +1,7 @@
 <img src="https://i.imgur.com/LXTmHwZ.jpg" width="200px">
 
+[![npm version](https://badge.fury.io/js/react-r2d2.svg)](https://badge.fury.io/js/react-r2d2)
+
 # R2D2
 A React Higher Order Component (HOC) for ensuring your data makes it to your component in time. This was inspired to reduce the code required for the common use case of retrieving data from the Redux store, and dispatching an action to fetch it if it is non-existent.
 
