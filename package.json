@@ -1,5 +1,5 @@
 {
-  "name": "R2D2",
+  "name": "react-r2d2",
   "version": "0.1.0",
   "description": "HOC for dispatching an action automatically on component render",
   "main": "lib/r2d2.js",
