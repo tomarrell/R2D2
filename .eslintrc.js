@@ -12,5 +12,7 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'react/no-did-update-set-state': 'off', // https://github.com/facebook/react/pull/12028
     'no-unused-expressions': 'off',
+    'react/forbid-prop-types': 'off',
+    'react/require-default-props': 'off',
   },
 };
