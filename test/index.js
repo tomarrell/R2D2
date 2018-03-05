@@ -96,6 +96,80 @@ describe('HOC', () => {
       expect(wrapper.prop('selector')).to.equal(customSelector);
       expect(wrapper.state('data')).to.equal(customState);
     });
+
+    it('custom selected state validity to be true', () => {
+      const customState = 'This is test state';
+      const customSelector = state => state.test;
+
+      const store = defaultStore({ test: customState, other: false });
+      const props = {
+        ...defaultProps(),
+        selector: customSelector,
+      };
+
+      const wrapper = mountWrapper({ store, props });
+
+      expect(wrapper.prop('selector')).to.equal(customSelector);
+      expect(wrapper.state('valid')).to.be.true;
+    });
+
+    it('new selector prop passed down, selects new state', () => {
+      const customState1 = 'Selector 1 State';
+      const customSelector1 = state => state.one;
+
+      const customState2 = 'Selector 2 State';
+      const customSelector2 = state => state.two;
+
+      const store = defaultStore({ one: customState1, two: customState2 });
+      const props = {
+        ...defaultProps(),
+        selector: customSelector1,
+      };
+
+      const wrapper = mountWrapper({ store, props });
+
+      expect(wrapper.prop('selector')).to.equal(customSelector1);
+      expect(wrapper.state('valid')).to.be.true;
+      expect(wrapper.state('data')).to.equal(customState1);
+
+      wrapper.setProps({
+        ...props,
+        selector: customSelector2,
+      });
+
+      expect(wrapper.prop('selector')).to.equal(customSelector2);
+      expect(wrapper.state('valid')).to.be.true;
+      expect(wrapper.state('data')).to.equal(customState2);
+    });
+
+    it('new selector prop passed down, validity changes', () => {
+      const customState1 = 'Selector 1 State';
+      const customSelector1 = state => state.one;
+
+      const customState2 = false;
+      const customSelector2 = state => state.two;
+
+      const store = defaultStore({ one: customState1, two: customState2 });
+      const props = {
+        ...defaultProps(),
+        selector: customSelector1,
+      };
+
+      const wrapper = mountWrapper({ store, props });
+
+      expect(wrapper.prop('selector')).to.equal(customSelector1);
+      expect(wrapper.state('data')).to.equal(customState1);
+      expect(wrapper.state('valid')).to.be.true;
+
+      wrapper.setProps({
+        ...props,
+        selector: customSelector2,
+      });
+
+      expect(wrapper.prop('selector')).to.equal(customSelector2);
+      expect(wrapper.state('data')).to.equal(customState2);
+      expect(wrapper.state('valid')).to.be.false;
+    });
   });
 
 });
