@@ -46,11 +46,12 @@ const mountWrapper = ({
 describe('HOC', () => {
 
   describe('General', () => {
-    it('should return something', () => {
+    it('import should return something', () => {
       expect(R2D2HOC).to.be.ok;
+      expect(R2D2HOC).to.be.a('function');
     });
 
-    it('should return a component', () => {
+    it('should return a component with wrapped displayName', () => {
       const wrapper = mountWrapper();
 
       expect(wrapper.name()).to.equal(`R2D2(${child().displayName})`);
@@ -170,6 +171,10 @@ describe('HOC', () => {
       expect(wrapper.state('data')).to.equal(customState2);
       expect(wrapper.state('valid')).to.be.false;
     });
+  });
+
+  describe('Dispatch', () => {
+    // TODO: Add tests
   });
 
 });
