@@ -44,51 +44,59 @@ const mountWrapper = ({
 
 
 describe('HOC', () => {
-  it('should return something', () => {
-    expect(R2D2HOC).to.be.ok;
-  });
 
-  it('should return a component', () => {
-    const wrapper = mountWrapper();
-
-    expect(wrapper.name()).to.equal(`R2D2(${child().displayName})`);
-  });
-
-  it('should have access to the store through context', () => {
-    const store = defaultStore();
-    const wrapper = mountWrapper({ store });
-
-    expect(wrapper.instance().context.store).to.equal(store);
-  });
-
-  it('should be valid with default validation on default store', () => {
-    const wrapper = mountWrapper();
-
-    expect(wrapper.state('valid')).to.be.true;
-  });
-
-  it('should validate the state on mount and fail if store is undefined', () => {
-    const wrapper = mountWrapper({
-      store: defaultStore(null),
+  describe('General', () => {
+    it('should return something', () => {
+      expect(R2D2HOC).to.be.ok;
     });
 
-    expect(wrapper.state('valid')).to.be.false;
+    it('should return a component', () => {
+      const wrapper = mountWrapper();
+
+      expect(wrapper.name()).to.equal(`R2D2(${child().displayName})`);
+    });
+
+    it('should have access to the store through context', () => {
+      const store = defaultStore();
+      const wrapper = mountWrapper({ store });
+
+      expect(wrapper.instance().context.store).to.equal(store);
+    });
   });
 
-  it('select the correct part of store using custom selector', () => {
-    const customState = 'This is test state';
-    const customSelector = state => state.test;
+  describe('Validation', () => {
+    it('should be valid with default validation on default store', () => {
+      const wrapper = mountWrapper();
 
-    const store = defaultStore({ test: customState, other: false });
-    const props = {
-      ...defaultProps(),
-      selector: customSelector,
-    };
+      expect(wrapper.state('valid')).to.be.true;
+    });
 
-    const wrapper = mountWrapper({ store, props });
+    it('should validate the state on mount and fail if store is undefined', () => {
+      const wrapper = mountWrapper({
+        store: defaultStore(null),
+      });
 
-    expect(wrapper.prop('selector')).to.equal(customSelector);
-    expect(wrapper.state('data')).to.equal(customState);
+      expect(wrapper.state('valid')).to.be.false;
+    });
   });
+
+  describe('Selection', () => {
+    it('select the correct part of store using custom selector', () => {
+      const customState = 'This is test state';
+      const customSelector = state => state.test;
+
+      const store = defaultStore({ test: customState, other: false });
+      const props = {
+        ...defaultProps(),
+        selector: customSelector,
+      };
+
+      const wrapper = mountWrapper({ store, props });
+
+      expect(wrapper.prop('selector')).to.equal(customSelector);
+      expect(wrapper.state('data')).to.equal(customState);
+    });
+  });
+
 });
 

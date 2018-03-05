@@ -15,5 +15,6 @@ module.exports = {
     'react/forbid-prop-types': 'off',
     'react/require-default-props': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'padded-blocks': 'off',
   },
 };
