@@ -102,10 +102,12 @@ export default function (WrappedComponent) {
     validateStore = () => {
       const { validateStore } = this.props;
 
-      const isStoreValid = validateStore(this.getSelectedState());
+      const selectedState = this.getSelectedState();
+      const isStoreValid = validateStore(selectedState);
 
       this.setState({
         valid: isStoreValid,
+        data: selectedState,
       });
 
       return isStoreValid;
@@ -114,6 +116,10 @@ export default function (WrappedComponent) {
     render() {
       const { valid, data } = this.state;
       const { altComponent: Alt, ...passThroughProps } = this.props;
+
+      if (!Alt.displayName) {
+        Alt.displayName = 'AltComponent';
+      }
 
       if (!Alt || valid) {
         return (
@@ -142,7 +148,6 @@ export default function (WrappedComponent) {
 
     validateStore: PropTypes.func,
     altComponent: PropTypes.oneOfType([
-      PropTypes.node,
       PropTypes.func,
     ]),
   };
@@ -151,6 +156,13 @@ export default function (WrappedComponent) {
     validateStore: state => !!state,
     altComponent: null,
   };
+
+  R2D2.displayName =
+    `R2D2(${
+      WrappedComponent.displayName
+      || WrappedComponent.name
+      || 'Component'
+    })`;
 
   return R2D2;
 }
