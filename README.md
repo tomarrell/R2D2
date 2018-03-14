@@ -43,8 +43,49 @@ Calling the HOC with passing in your component as the argument, you will be retu
 ## Usage
 An example of this HOC in the wild.
 
+###### Component.js
 ```javascript
-// Example
+import React from 'react';
+import { R2D2 } from 'r2d2';
+
+const Component = ({ data }) => {
+  return (
+    <div>I will always render with {data}</div>
+  );
+};
+
+export default R2D2(Component);
+```
+
+###### Container.js
+```javascript
+import React, { Component } from 'react';
+import WrappedComponent from './Component';
+
+import { selector } from './selectors';
+import { action } from './actions';
+
+class Container extends Component {
+
+  // If the store is not able to be validated, this component will be rendered as altComponent.
+  loadingComponent = () => <div>Loading...</div>;
+
+  render() {
+    return (
+      <div>
+        <WrappedComponent
+          selector={selector}
+          action={action}
+          {/* v Optional v */}
+          altComponent={this.loadingComponent}
+          validateStore={state => state.id !== undefined}
+        />
+      </div>
+    );
+  }
+}
+
+export default Container;
 ```
 
 ## Contributing 
