@@ -1,7 +1,8 @@
 {
   "name": "react-r2d2",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "HOC for dispatching an action automatically on component render",
+  "keywords": ["react", "higher", "order", "component", "redux", "dispatch", "store"],
   "repository": "https://github.com/tomarrell/R2D2",
   "main": "lib/r2d2.js",
   "module": "es/r2d2.js",
