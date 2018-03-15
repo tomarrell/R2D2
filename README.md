@@ -46,7 +46,7 @@ An example of this HOC in the wild.
 ###### Component.js
 ```javascript
 import React from 'react';
-import { R2D2 } from 'r2d2';
+import R2D2 from 'react-r2d2';
 
 const Component = ({ data }) => {
   return (
