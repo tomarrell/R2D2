@@ -143,7 +143,7 @@ export default function (WrappedComponent) {
     selector: PropTypes.func.isRequired,
     action: PropTypes.shape({
       type: PropTypes.string,
-      payload: PropTypes.object,
+      payload: PropTypes.any,
     }).isRequired,
 
     validateStore: PropTypes.func,
