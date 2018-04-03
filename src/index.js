@@ -117,11 +117,7 @@ export default function (WrappedComponent) {
       const { valid, data } = this.state;
       const { altComponent: Alt, ...passThroughProps } = this.props;
 
-      if (!Alt.displayName) {
-        Alt.displayName = 'AltComponent';
-      }
-
-      if (!Alt || valid) {
+      if (valid) {
         return (
           <WrappedComponent
             {...passThroughProps}
@@ -131,6 +127,7 @@ export default function (WrappedComponent) {
       }
 
       if (Alt) return <Alt />;
+
       return null;
     }
   }
