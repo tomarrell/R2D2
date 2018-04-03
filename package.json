@@ -1,6 +1,6 @@
 {
   "name": "react-r2d2",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "HOC for dispatching an action automatically on component render",
   "keywords": ["react", "higher", "order", "component", "redux", "dispatch", "store"],
   "repository": "https://github.com/tomarrell/R2D2",
@@ -12,7 +12,7 @@
     "build:es": "rollup -c -f es -o es/r2d2.js",
     "build:umd": "rollup -c -f umd -n r2d2 -o dist/r2d2.js",
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd",
-    "publish": "npm run build && npm publish"
+    "deploy": "npm run build && npm publish"
   },
   "author": "Tom Arrell <me@tomarrell.com> (https://github.com/tomarrell)",
   "license": "MIT",
