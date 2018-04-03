@@ -60,16 +60,18 @@ export default R2D2(Component);
 ###### Container.js
 ```javascript
 import React, { Component } from 'react';
+
 import WrappedComponent from './Component';
 
 import { selector } from './selectors';
 import { action } from './actions';
 
+// If the store is not able to be validated, this component will be rendered as altComponent.
+const Loading = () => <div>Loading...</div>;
+
 class Container extends Component {
-
-  // If the store is not able to be validated, this component will be rendered as altComponent.
-  loadingComponent = () => <div>Loading...</div>;
-
+  state = {}
+  
   render() {
     return (
       <div>
@@ -77,7 +79,7 @@ class Container extends Component {
           selector={selector}
           action={action}
           {/* v Optional v */}
-          altComponent={this.loadingComponent}
+          altComponent={Loading}
           validateStore={state => state.id !== undefined}
         />
       </div>
